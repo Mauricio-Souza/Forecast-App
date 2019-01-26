@@ -1,4 +1,4 @@
-package dev.msouza.com.my_app_kotlin
+package dev.msouza.com.forecast_app
 
 import org.junit.Test
 
