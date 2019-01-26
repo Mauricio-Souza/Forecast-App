@@ -1,6 +1,8 @@
 package dev.msouza.com.forecast_app.connection
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptor
+import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptorImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -21,7 +23,9 @@ object RetrofitProvider {
                 .build()
     }
 
-    inline fun <reified T> get() : T = RetrofitApi.create(T::class.java)
+    inline fun<reified T> get() : T {
+        return RetrofitApi.create(T::class.java)
+    }
 }
 
 object HttpClientProvider {
@@ -30,7 +34,6 @@ object HttpClientProvider {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor(AuthInterceptor())
             .build()
-
 }
 
 class AuthInterceptor : Interceptor {
