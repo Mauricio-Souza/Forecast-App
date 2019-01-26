@@ -1,4 +1,4 @@
-package dev.msouza.com.my_app_kotlin
+package dev.msouza.com.forecast_app
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("dev.msouza.com.my_app_kotlin", appContext.packageName)
+        assertEquals("dev.msouza.com.forecast_app", appContext.packageName)
     }
 }
