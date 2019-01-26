@@ -1,8 +1,8 @@
-package dev.msouza.com.my_app_kotlin.ui
+package dev.msouza.com.forecast_app.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import dev.msouza.com.my_app_kotlin.R
+import dev.msouza.com.forecast_app.R
 
 class MainActivity : AppCompatActivity() {
 
