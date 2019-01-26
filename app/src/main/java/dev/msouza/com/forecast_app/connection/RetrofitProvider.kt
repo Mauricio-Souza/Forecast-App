@@ -12,32 +12,29 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val API_KEY = "080ccb2ad8b14329812153829192601"
 
-object RetrofitProvider {
+class RetrofitProvider {
 
-    val RetrofitApi: Retrofit by lazy {
-        Retrofit.Builder()
-                .baseUrl("https://api.apixu.com/v1/")
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(HttpClientProvider.client)
-                .build()
+    companion object {
+
+        inline operator fun<reified T> invoke(noConnectivityInterceptor: ConnectivityInterceptorImpl) : T {
+            val client: OkHttpClient = OkHttpClient().newBuilder()
+                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .addInterceptor(AuthInterceptor())
+                    .addInterceptor(noConnectivityInterceptor)
+                    .build()
+
+            val retrofitApi = Retrofit.Builder()
+                    .baseUrl("https://api.apixu.com/v1/")
+                    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build()
+            return retrofitApi.create(T::class.java)
+        }
     }
-
-    inline fun<reified T> get() : T {
-        return RetrofitApi.create(T::class.java)
-    }
-}
-
-object HttpClientProvider {
-
-    val client: OkHttpClient = OkHttpClient().newBuilder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addInterceptor(AuthInterceptor())
-            .build()
 }
 
 class AuthInterceptor : Interceptor {
-
     override fun intercept(chain: Interceptor.Chain): Response {
         val url = chain.request()
                 .url()
@@ -52,5 +49,4 @@ class AuthInterceptor : Interceptor {
 
         return chain.proceed(request)
     }
-
 }
