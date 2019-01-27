@@ -1,7 +1,13 @@
-package dev.msouza.com.forecast_app.data.network.response
+package dev.msouza.com.forecast_app.data.database.entities
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+const val CURRENT_WEATHER_ID = 0
+
+@Entity(tableName = "current_weather")
 data class CurrentWeatherEntry(
         @SerializedName("temp_c")
         val tempC: Int,
@@ -9,6 +15,7 @@ data class CurrentWeatherEntry(
         val tempF: Double,
         @SerializedName("is_day")
         val isDay: Int,
+        @Embedded(prefix = "condition_")
         val condition: Condition,
         @SerializedName("wind_mph")
         val windMph: Double,
@@ -28,4 +35,7 @@ data class CurrentWeatherEntry(
         val visKm: Double,
         @SerializedName("vis_miles")
         val visMiles: Double
-)
+) {
+        @PrimaryKey(autoGenerate = false)
+        var id: Int = CURRENT_WEATHER_ID
+}
