@@ -1,4 +1,4 @@
-package dev.msouza.com.forecast_app.data.network.response
+package dev.msouza.com.forecast_app.data.database.entities
 
 import com.google.gson.annotations.SerializedName
 
