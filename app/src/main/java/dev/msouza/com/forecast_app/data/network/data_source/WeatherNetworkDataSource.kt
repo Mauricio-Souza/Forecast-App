@@ -6,7 +6,6 @@ import androidx.lifecycle.MediatorLiveData
 import dev.msouza.com.forecast_app.data.network.response.CurrentWeatherResponse
 import dev.msouza.com.forecast_app.data.network.service.WeatherApiService
 import dev.msouza.com.forecast_app.intern.NoConnectivityException
-import kotlinx.coroutines.CoroutineExceptionHandler
 
 class WeatherNetworkDataSource (
         private val weatherApiService: WeatherApiService
