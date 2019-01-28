@@ -1,7 +1,6 @@
-package dev.msouza.com.forecast_app.connection
+package dev.msouza.com.forecast_app.data.network.client_provider
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptor
 import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptorImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
