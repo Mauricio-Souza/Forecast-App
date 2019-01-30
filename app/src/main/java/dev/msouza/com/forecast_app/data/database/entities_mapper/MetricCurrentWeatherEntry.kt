@@ -1,4 +1,4 @@
-package dev.msouza.com.forecast_app.data.database.unitlocalized
+package dev.msouza.com.forecast_app.data.database.entities_mapper
 
 import androidx.room.ColumnInfo
 
