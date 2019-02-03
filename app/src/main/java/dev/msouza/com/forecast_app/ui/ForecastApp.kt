@@ -9,11 +9,13 @@ import dev.msouza.com.forecast_app.data.network.data_source.WeatherDataSource
 import dev.msouza.com.forecast_app.data.network.data_source.WeatherNetworkDataSource
 import dev.msouza.com.forecast_app.data.repository.ForecastRepository
 import dev.msouza.com.forecast_app.data.repository.ForecastRepositoryImpl
+import dev.msouza.com.forecast_app.ui.current.CurrentWeatherViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 class ForecastApp : Application(), KodeinAware {
@@ -26,5 +28,6 @@ class ForecastApp : Application(), KodeinAware {
         bind() from singleton { RetrofitProvider(instance()) }
         bind<WeatherDataSource>() with singleton { WeatherNetworkDataSource(instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
+        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
     }
 }
