@@ -1,4 +1,4 @@
-package dev.msouza.com.forecast_app.ui.current
+package dev.msouza.com.forecast_app.ui.weather.current
 
 import androidx.lifecycle.ViewModel
 import dev.msouza.com.forecast_app.data.repository.ForecastRepository
