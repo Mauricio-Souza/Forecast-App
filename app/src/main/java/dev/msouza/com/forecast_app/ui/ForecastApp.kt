@@ -9,7 +9,7 @@ import dev.msouza.com.forecast_app.data.network.data_source.WeatherDataSource
 import dev.msouza.com.forecast_app.data.network.data_source.WeatherNetworkDataSource
 import dev.msouza.com.forecast_app.data.repository.ForecastRepository
 import dev.msouza.com.forecast_app.data.repository.ForecastRepositoryImpl
-import dev.msouza.com.forecast_app.ui.current.CurrentWeatherViewModelFactory
+import dev.msouza.com.forecast_app.ui.weather.current.CurrentWeatherViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
