@@ -18,4 +18,8 @@ class CurrentWeatherViewModel(
         forecastRepository.getCurrentWeather(isMetric)
     }
 
+    fun getUnitAbbreviation(metric: String, imperial: String) : String {
+        return if (isMetric) metric else imperial
+    }
+
 }

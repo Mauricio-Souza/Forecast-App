@@ -9,7 +9,7 @@ import dev.msouza.com.forecast_app.data.database.entities.CurrentWeatherEntry
 
 const val DATABASE_NAME = "forecast.db"
 
-@Database(entities = arrayOf(CurrentWeatherEntry::class), version = 1)
+@Database(entities = arrayOf(CurrentWeatherEntry::class), version = 1, exportSchema = false)
 abstract class ForecastDatabase : RoomDatabase() {
 
     abstract fun weatherDao() : CurrentWeatherDao
