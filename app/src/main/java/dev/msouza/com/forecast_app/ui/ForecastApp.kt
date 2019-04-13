@@ -1,13 +1,17 @@
 package dev.msouza.com.forecast_app.ui
 
 import android.app.Application
+import android.preference.PreferenceManager
 import com.jakewharton.threetenabp.AndroidThreeTen
+import dev.msouza.com.forecast_app.R
 import dev.msouza.com.forecast_app.data.database.db_provider.ForecastDatabase
 import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptor
 import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptorImpl
 import dev.msouza.com.forecast_app.data.network.client_provider.RetrofitProvider
 import dev.msouza.com.forecast_app.data.network.data_source.WeatherDataSource
 import dev.msouza.com.forecast_app.data.network.data_source.WeatherNetworkDataSource
+import dev.msouza.com.forecast_app.data.provider.UnitProvider
+import dev.msouza.com.forecast_app.data.provider.UnitProviderImpl
 import dev.msouza.com.forecast_app.data.repository.ForecastRepository
 import dev.msouza.com.forecast_app.data.repository.ForecastRepositoryImpl
 import dev.msouza.com.forecast_app.ui.weather.current.CurrentWeatherViewModelFactory
@@ -29,11 +33,13 @@ class ForecastApp : Application(), KodeinAware {
         bind() from singleton { RetrofitProvider(instance()) }
         bind<WeatherDataSource>() with singleton { WeatherNetworkDataSource(instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
+        bind<UnitProvider>() with  singleton { UnitProviderImpl(instance()) }
+        bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 }

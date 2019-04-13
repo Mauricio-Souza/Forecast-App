@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Forecast</string>
+    <string name="title_weather_location">Weather Location</string>
+    <string name="title_user_device_location">User device location</string>
+    <string name="summary_user_device_location">Allow the to get your location</string>
+    <string name="key_user_device_location">USER_DEVICE_LOCATION</string>
+    <string name="key_location">CUSTOM_LOCATION</string>
+    <string name="title_location">Location</string>
+    <string name="summary_locaton">The location for which the weather is displayed</string>
+    <string name="title_units">Units</string>
+    <string name="title_list_units">Unit System</string>
+    <string name="key_list_units">UNIT_SYSTEM</string>
+    <string name="title_toolbar_settings">Settings</string>
 </resources>
