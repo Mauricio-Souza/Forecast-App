@@ -1,14 +1,18 @@
 package dev.msouza.com.forecast_app.data.network.data_source
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptorImpl
+import dev.msouza.com.forecast_app.data.network.client_provider.RetrofitProvider
 import dev.msouza.com.forecast_app.data.network.response.CurrentWeatherResponse
 import dev.msouza.com.forecast_app.data.network.service.WeatherApiService
 import dev.msouza.com.forecast_app.intern.NoConnectivityException
 
 class WeatherNetworkDataSource (
-        private val weatherApiService: WeatherApiService
+        context: Context,
+        private val retrofitProvider: WeatherApiService = RetrofitProvider.invoke(context)
 ) : WeatherDataSource {
 
     private val _noConnectivity = MediatorLiveData<String>()
@@ -22,7 +26,7 @@ class WeatherNetworkDataSource (
 
     override suspend fun fetchCurrentWeather(location: String, languageCode: String) {
         try {
-            val currentWeather = weatherApiService.getCurrentWeather(location, languageCode).await()
+            val currentWeather = retrofitProvider.getCurrentWeather(location, languageCode).await()
             _downloadedCurrentWeather.postValue(currentWeather)
         } catch (e: NoConnectivityException) {
             Log.e("Error: ", e.message)
