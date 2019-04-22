@@ -1,5 +1,6 @@
 package dev.msouza.com.forecast_app.data.network.client_provider
 
+import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptorImpl
 import dev.msouza.com.forecast_app.data.network.service.WeatherApiService
@@ -17,11 +18,11 @@ class RetrofitProvider {
 
     companion object {
 
-        operator fun invoke(noConnectivityInterceptor: ConnectivityInterceptorImpl) : WeatherApiService {
+        operator fun invoke(context: Context) : WeatherApiService {
             val client: OkHttpClient = OkHttpClient().newBuilder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                     .addInterceptor(AuthInterceptor())
-                    .addInterceptor(noConnectivityInterceptor)
+                    .addInterceptor(ConnectivityInterceptorImpl(context.applicationContext))
                     .build()
 
             val retrofitApi = Retrofit.Builder()
