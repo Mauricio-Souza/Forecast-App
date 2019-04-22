@@ -33,6 +33,7 @@ dependencies {
     def nav_version = "1.0.0-alpha06"
     def room_version = "2.1.0-alpha03"
     def lifecycle_version = "2.0.0"
+    def koin_version = "1.0.2"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -52,6 +53,12 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
 
+    // Koin
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
+    implementation "org.koin:koin-core:$koin_version"
+
     // Kodein
     implementation 'org.kodein.di:kodein-di-generic-jvm:5.2.0'
     implementation 'org.kodein.di:kodein-di-framework-android-x:5.2.0'
@@ -64,10 +71,10 @@ dependencies {
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version" // use -ktx for Kotlin
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"// use kapt for Kotlin
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     // WeatherLocation
     implementation 'com.google.android.gms:play-services-location:16.0.0'

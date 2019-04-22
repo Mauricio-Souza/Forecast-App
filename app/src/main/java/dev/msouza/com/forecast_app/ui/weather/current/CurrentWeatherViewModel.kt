@@ -21,6 +21,10 @@ class CurrentWeatherViewModel(
         forecastRepository.getCurrentWeather(isMetric)
     }
 
+    val weatherLocation by lazyDeferred {
+        forecastRepository.getWeatherLocation()
+    }
+
     fun getUnitAbbreviation(metric: String, imperial: String) : String {
         return if (isMetric) metric else imperial
     }

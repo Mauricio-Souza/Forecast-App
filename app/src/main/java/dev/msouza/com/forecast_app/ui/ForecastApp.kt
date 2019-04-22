@@ -10,6 +10,8 @@ import dev.msouza.com.forecast_app.data.network.ConnectivityInterceptorImpl
 import dev.msouza.com.forecast_app.data.network.client_provider.RetrofitProvider
 import dev.msouza.com.forecast_app.data.network.data_source.WeatherDataSource
 import dev.msouza.com.forecast_app.data.network.data_source.WeatherNetworkDataSource
+import dev.msouza.com.forecast_app.data.provider.LocationProvider
+import dev.msouza.com.forecast_app.data.provider.LocationProviderImpl
 import dev.msouza.com.forecast_app.data.provider.UnitProvider
 import dev.msouza.com.forecast_app.data.provider.UnitProviderImpl
 import dev.msouza.com.forecast_app.data.repository.ForecastRepository
@@ -29,11 +31,12 @@ class ForecastApp : Application(), KodeinAware {
 
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().weatherDao() }
-        bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(this@ForecastApp) }
-        bind() from singleton { RetrofitProvider(instance()) }
+        bind() from singleton { instance<ForecastDatabase>().weatherLocation() }
+        bind() from singleton { RetrofitProvider(instance(instance())) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl() }
         bind<WeatherDataSource>() with singleton { WeatherNetworkDataSource(instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind<UnitProvider>() with  singleton { UnitProviderImpl(instance()) }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 

@@ -37,11 +37,17 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
+
+        viewModel.weatherLocation.await().observe(this@CurrentWeatherFragment, Observer { location ->
+            if (location == null) return@Observer
+
+            setupToolbarTitle(location.name)
+        })
+
         viewModel.weather.await().observe(this@CurrentWeatherFragment, Observer {
             if (it == null) return@Observer
 
             groupLoading.visibility = View.GONE
-            setupToolbarTitle("São Paulo")
             updateCondition(it.conditionText)
             updatePreciptation(it.preciptationVolume)
             updateTemperature(it.temperature, it.feelsLikeTemperature)
